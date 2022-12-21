@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 
 import Home from './components/Home.jsx';
 import BloodPressure from './components/BloodPressure.jsx';
@@ -21,17 +21,11 @@ function App () {
 
     <Router>
       <nav>
-        <FontAwesomeIcon icon= {faCow} />
-        <div className= 'navbar-links'>
-          <div className= 'link'>
-            <Link className= 'link-text' to='/'>Home</Link>
-          </div>
-          <div className= 'link'>
-            <Link className= 'link-text'to='/bloodpressure'>BP</Link>
-          </div>
-          <div className= 'link'>
-            <Link className= 'link-text' to='/contact'>Contact</Link>
-          </div>
+        <FontAwesomeIcon className = 'bee-logo' icon= {faCow} />
+        <div>
+          <NavLink to='/'>Home</NavLink>
+          <NavLink to='/bloodpressure'>Health</NavLink>
+          <NavLink to='/contact'>Contact</NavLink>
         </div>
       </nav>
 
