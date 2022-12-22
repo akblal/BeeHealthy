@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 
 import Home from './components/Home.jsx';
 import BloodPressure from './components/BloodPressure.jsx';
+import AddMeasurement from './components/AddMeasurement.jsx';
+import History from './components/History.jsx';
 import UserBloodPressure from './components/UserBloodPressure.jsx';
 import Contact from './components/Contact.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
@@ -20,7 +22,7 @@ function App () {
   return (
 
     <Router>
-      <nav>
+      <nav className= 'primary-nav'>
         <FontAwesomeIcon className = 'bee-logo' icon= {faCow} />
         <div>
           <NavLink to='/'>Home</NavLink>
@@ -31,7 +33,11 @@ function App () {
 
       <Routes>
         <Route path='/' element= {<Home />} />
-        <Route path='/bloodpressure' element= {<BloodPressure />} />
+        <Route path='/bloodpressure' element= {<BloodPressure />} >
+          <Route index element= {<AddMeasurement />} />
+          <Route path= 'addmeasurement' element= {<AddMeasurement />} />
+          <Route path= 'history' element= {<History />} />
+        </Route>
         <Route path='/bloodpressure/:id' element= {<UserBloodPressure />} />
         <Route path='/contact' element= {<Contact />} />
         <Route path='*' element = {<ErrorPage />} />
