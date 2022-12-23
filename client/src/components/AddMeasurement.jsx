@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+import axios from 'axios';
+
 function AddMeasurement  ()  {
 
   const fullMedList = [
@@ -53,6 +55,16 @@ function AddMeasurement  ()  {
     } else {
       setErrSystolic(false);
     }
+
+    if (+systolic === Number(systolic) && systolic.length > 0 && +diastolic === Number(diastolic) && diastolic.length > 0 ) {
+      axios.post ('/insertData', {
+        diastolic: diastolic,
+        systolic: systolic
+      })
+      .catch ((err) => {
+        console.log (err)
+      })
+    }
   }
 
   const addMed = (e) => {
@@ -94,14 +106,15 @@ function AddMeasurement  ()  {
           required
           id="outlined-basic"
           label="Diastolic"
-          className= 'bloodpressure-field'
           onChange= {handleDiastolic}
+          inputProps= {{maxLength:3,}}
         />
         <TextField
           required
           id="outlined-number"
           label="Systolic"
           onChange= {handleSystolic}
+          inputProps= {{maxLength:3,}}
         />
         <Button
           variant="outlined"
@@ -113,15 +126,35 @@ function AddMeasurement  ()  {
         {errSystolic ? <div>Error systolic</div> : <div>{systolic}</div>}
       </Stack>
 
+
+      <div>Medications taken</div>
+
+      <Stack direction= 'row' spacing= {2}>
+        {takenMedList.map((item, index) => {
+          return <Button variant= 'outlined'
+                  orientation= 'vertical'
+                  size= 'small'
+                  aria-label= 'alignment-button-group'
+                  sx={{width:100, height:100, marginBottom:2}}
+                  space={2}
+                  key= {index}
+                  value= {index}
+                  onClick= {removeMed}>
+                  {item.name} {item.dosage}
+                </Button>
+        })}
+      </Stack>
+
+      <div>-------------------------------------</div>
       <div>Medications Prescribed</div>
 
-      <Stack>
+      <Stack direction= 'row' spacing= {2}>
         {recMedList.map((item, index) => {
           return <Button variant= 'outlined'
                   orientation= 'vertical'
                   size= 'small'
                   aria-label= 'alignment-button-group'
-                  sx={{width:100, marginBottom: 2}}
+                  sx={{width:100, height:100, marginBottom:2}}
                   space={2}
                   key= {index}
                   value= {index}
@@ -131,24 +164,6 @@ function AddMeasurement  ()  {
         })}
       </Stack>
 
-      <div>-------------------------------------</div>
-      <div>Medications taken</div>
-
-      <Stack>
-        {takenMedList.map((item, index) => {
-          return <Button variant= 'outlined'
-                  orientation= 'vertical'
-                  size= 'small'
-                  aria-label= 'alignment-button-group'
-                  sx={{width:100, marginBottom: 2}}
-                  space={2}
-                  key= {index}
-                  value= {index}
-                  onClick= {removeMed}>
-                  {item.name} {item.dosage}
-                </Button>
-        })}
-      </Stack>
     </div>
   )
 }

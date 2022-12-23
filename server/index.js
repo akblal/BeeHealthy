@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+const controller = require('./controller.js');
+
 
 const path = require("path");
 const app = express();
@@ -20,6 +23,8 @@ app.get('/*', function(req, res) {
 })
 
 
-app.listen(3000,()=>{
+app.post ('/insertData', controller.insertData);
+
+app.listen(Number(process.env.PORT),()=>{
   console.log('listening on port 3000');
 })
