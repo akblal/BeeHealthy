@@ -59,7 +59,9 @@ function AddMeasurement  ()  {
     if (+systolic === Number(systolic) && systolic.length > 0 && +diastolic === Number(diastolic) && diastolic.length > 0 ) {
       axios.post ('/insertData', {
         diastolic: diastolic,
-        systolic: systolic
+        systolic: systolic,
+        medsList: recMedList,
+        medsTaken: takenMedList
       })
       .catch ((err) => {
         console.log (err)

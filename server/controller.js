@@ -16,7 +16,10 @@ module.exports = {
     insertData (req, res) {
       const diastolic = req.body.diastolic;
       const systolic = req.body.systolic;
-      model.insertData(diastolic, systolic)
+      const medsList = req.body.medsList;
+      const medsTaken = req.body.medsTaken;
+      console.log (medsList, medsTaken)
+      model.insertData(diastolic, systolic, medsList, medsTaken)
         .then ((result) => {
           res.sendStatus(201);
         })
