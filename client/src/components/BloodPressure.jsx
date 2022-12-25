@@ -10,6 +10,7 @@ function BloodPressure () {
       <nav>
         <Link to= 'addmeasurement'>Add Measurement</Link>
         <Link to= 'history'>History</Link>
+        <Link to= 'trend'>Trend</Link>
       </nav>
       <Outlet />
     </div>

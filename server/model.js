@@ -26,7 +26,18 @@ module.exports = {
         })
       })
     },
-
+    getAllMeasurements() {
+      return new Promise ((resolve, reject) => {
+        const queryStatement= 'SELECT * FROM healthData ORDER BY id DESC;';
+        console.log('in model')
+        pool.query(queryStatement, (err, results) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(results.rows);
+        })
+      })
+    }
   // getEmail (email) {
   //   return new Promise ((resolve, reject) => {
   //     console.log (email, 'model')

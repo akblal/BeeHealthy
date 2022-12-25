@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Home () {
+function Trend () {
 
   return (
     <div>
-      This is Home
+      Insert chart here
     </div>
   )
 }
 
-export default Home;
+export default Trend;

@@ -1,18 +1,7 @@
 const model = require ('./model.js');
 
 module.exports = {
-  // insertEmail(req, res) {
-  //   let email = req.body.email;
-  //   let firstName = req.body.firstName;
-  //   let lastName = req. body.lastName;
-  //   model.insertEmail(email, firstName, lastName)
-  //     .then ((results) => {
-  //       res.sendStatus(201);
-  //     })
-  //     .catch((err) => {
-  //       res.send(500);
-  //     })
-  // },
+
     insertData (req, res) {
       const diastolic = req.body.diastolic;
       const systolic = req.body.systolic;
@@ -25,6 +14,19 @@ module.exports = {
         })
         .catch((err) => {
           res.sendStatus(500);
+        })
+    },
+    getAllMeasurements(req, res) {
+      console.log('confirm in controller')
+      model.getAllMeasurements()
+        .then((results) => {
+          console.log ('in controller', results);
+          res.send(results);
+          res.status(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500)
         })
     }
 

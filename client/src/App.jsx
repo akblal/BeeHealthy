@@ -6,7 +6,7 @@ import Home from './components/Home.jsx';
 import BloodPressure from './components/BloodPressure.jsx';
 import AddMeasurement from './components/AddMeasurement.jsx';
 import History from './components/History.jsx';
-import UserBloodPressure from './components/UserBloodPressure.jsx';
+import Trend from './components/Trend.jsx';
 import Contact from './components/Contact.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 
@@ -37,8 +37,8 @@ function App () {
           <Route index element= {<AddMeasurement />} />
           <Route path= 'addmeasurement' element= {<AddMeasurement />} />
           <Route path= 'history' element= {<History />} />
+          <Route path= 'trend' element= {<Trend />} />
         </Route>
-        <Route path='/bloodpressure/:id' element= {<UserBloodPressure />} />
         <Route path='/contact' element= {<Contact />} />
         <Route path='*' element = {<ErrorPage />} />
       </Routes>

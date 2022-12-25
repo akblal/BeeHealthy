@@ -4,27 +4,11 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+import { fullMedList } from './FullMedList.jsx'
+
 import axios from 'axios';
 
 function AddMeasurement  ()  {
-
-  const fullMedList = [
-    {
-      name: 'Motrin',
-      dosage: '5 mg',
-      id: 0,
-    },
-    {
-      name: 'Advil',
-      dosage: '10 mg',
-      id: 1,
-    },
-    {
-      name: 'Tylenol',
-      dosage: '15 mg',
-      id: 2,
-    },
-  ];
 
   const [diastolic, setDiastolic] = useState();
   const [systolic, setSystolic] = useState();
@@ -57,11 +41,25 @@ function AddMeasurement  ()  {
     }
 
     if (+systolic === Number(systolic) && systolic.length > 0 && +diastolic === Number(diastolic) && diastolic.length > 0 ) {
+      let tempMedsList = [];
+      let tempTakenList = [];
+
+      fullMedList.forEach((med) => {
+        let medName = med.name + ' ' + med.dosage;
+        tempMedsList.push(medName)
+      })
+
+      takenMedList.forEach((med) => {
+        let medName = med.name + ' ' + med.dosage;
+        tempTakenList.push(medName)
+        tempTakenList = tempTakenList;
+      })
+
       axios.post ('/insertData', {
         diastolic: diastolic,
         systolic: systolic,
-        medsList: recMedList,
-        medsTaken: takenMedList
+        medsList: tempMedsList,
+        medsTaken: tempTakenList
       })
       .catch ((err) => {
         console.log (err)

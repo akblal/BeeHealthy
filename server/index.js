@@ -14,6 +14,9 @@ app.use(express.json());
 
 
 
+
+app.get ('/getAllMeasurements', controller.getAllMeasurements);
+
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
     if (err) {
