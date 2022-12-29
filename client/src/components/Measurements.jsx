@@ -10,7 +10,7 @@ function Measurements ({ currentPosts, loading }) {
       {currentPosts.map((measurement, index) => {
         return (
           <div key = {index}>
-            <span> {new Date (measurement.created_at).toLocaleString()} {measurement.diastolic}/{measurement.systolic} </span>
+            <span> {new Date (measurement.created_at).toLocaleString()} {measurement.systolic}/{measurement.diastolic} </span>
             {measurement.meds_taken.map((taken, index) =>{
               return (
                 <span style={{marginRight: 10}} key= {index}>{taken}</span>

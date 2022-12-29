@@ -48,6 +48,8 @@ nav a.active {
   cursor: pointer;
 }
 
-.page-link{
-
+.selected-page{
+  border: darkred;
+  border-width: 2px;
+  border-style: solid;
 }

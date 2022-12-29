@@ -8,7 +8,7 @@ import { fullMedList } from './FullMedList.jsx'
 
 import axios from 'axios';
 
-function AddMeasurement  ()  {
+function AddMeasurement ({ getData })  {
 
   const [diastolic, setDiastolic] = useState();
   const [systolic, setSystolic] = useState();
@@ -61,6 +61,9 @@ function AddMeasurement  ()  {
         medsList: tempMedsList,
         medsTaken: tempTakenList
       })
+      .then((results)=> {
+        getData();
+      })
       .catch ((err) => {
         console.log (err)
       })
@@ -105,15 +108,15 @@ function AddMeasurement  ()  {
         <TextField
           required
           id="outlined-basic"
-          label="Diastolic"
-          onChange= {handleDiastolic}
+          label="Systolic"
+          onChange= {handleSystolic}
           inputProps= {{maxLength:3,}}
         />
         <TextField
           required
           id="outlined-number"
-          label="Systolic"
-          onChange= {handleSystolic}
+          label="Diastolic"
+          onChange= {handleDiastolic}
           inputProps= {{maxLength:3,}}
         />
         <Button

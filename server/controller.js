@@ -7,7 +7,6 @@ module.exports = {
       const systolic = req.body.systolic;
       const medsList = req.body.medsList;
       const medsTaken = req.body.medsTaken;
-      console.log (medsList, medsTaken)
       model.insertData(diastolic, systolic, medsList, medsTaken)
         .then ((result) => {
           res.sendStatus(201);
@@ -17,10 +16,8 @@ module.exports = {
         })
     },
     getAllMeasurements(req, res) {
-      console.log('confirm in controller')
       model.getAllMeasurements()
         .then((results) => {
-          console.log ('in controller', results);
           res.send(results);
           res.status(200);
         })

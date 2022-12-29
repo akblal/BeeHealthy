@@ -5,7 +5,7 @@ import Pagination from './Pagination.jsx';
 import axios from 'axios';
 
 
-function History  ()  {
+function History ()  {
 
   const [allMeasurements, setAllMeasurements] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,8 @@ function History  ()  {
     setLoading(true);
     axios.get('/getAllMeasurements')
       .then((results) => {
-        setAllMeasurements((results.data));
+        setAllMeasurements(results.data);
+        getUserData(results.data);
       })
       .catch((err) => {
         console.log(err);

@@ -17,7 +17,6 @@ module.exports = {
       return new Promise ((resolve, reject) => {
         const queryStatement = 'INSERT INTO healthData (diastolic, systolic, meds_list, meds_taken) VALUES ($1, $2, $3, $4);';
         const queryArgument = [diastolic, systolic, medsList, medsTaken];
-        console.log (diastolic, systolic)
         pool.query(queryStatement, queryArgument, (err, results) => {
           if (err) {
             return reject(err);

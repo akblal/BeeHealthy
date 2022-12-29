@@ -4,7 +4,6 @@ import { Link, Outlet } from 'react-router-dom';
 
 function BloodPressure () {
 
-
   return (
     <div>
       <nav>

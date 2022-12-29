@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 import Home from './components/Home.jsx';
 import BloodPressure from './components/BloodPressure.jsx';
@@ -14,10 +15,28 @@ import ErrorPage from './components/ErrorPage.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCow } from '@fortawesome/free-solid-svg-icons';
 
+
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 function App () {
+
+  const [userData, setUserData] = useState([]);
+
+  useEffect (() => {
+    getData();
+  }, [])
+
+  const getData = () => {
+    axios.get('/getAllMeasurements')
+      .then((results) => {
+        setUserData(results.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
 
@@ -35,9 +54,10 @@ function App () {
         <Route path='/' element= {<Home />} />
         <Route path='/bloodpressure' element= {<BloodPressure />} >
           <Route index element= {<AddMeasurement />} />
-          <Route path= 'addmeasurement' element= {<AddMeasurement />} />
+          <Route path= 'addmeasurement' element= {<AddMeasurement getData= {getData}/>} />
           <Route path= 'history' element= {<History />} />
-          <Route path= 'trend' element= {<Trend />} />
+          {console.log(userData, 'userdata in app level ahhah')}
+          <Route path= 'trend' element= {<Trend userData= {userData}/>} />
         </Route>
         <Route path='/contact' element= {<Contact />} />
         <Route path='*' element = {<ErrorPage />} />

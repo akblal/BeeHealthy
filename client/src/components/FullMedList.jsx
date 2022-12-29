@@ -1,4 +1,4 @@
-export const  fullMedList = [
+export const fullMedList = [
   {
     name: 'Motrin',
     dosage: '5 mg',
