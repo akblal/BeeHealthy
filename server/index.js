@@ -16,7 +16,8 @@ app.use(express.json());
 
 
 app.get ('/getAllMeasurementsReversed', controller.getAllMeasurementsReversed);
-app.get ('/getAllMeasurementsChronological', controller.getAllMeasurementsChronological)
+app.get ('/getAllMeasurementsChronological', controller.getAllMeasurementsChronological);
+app.get ('/getLastXMeasurements', controller.getLastXMeasurements);
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {

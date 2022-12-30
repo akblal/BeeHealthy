@@ -20,10 +20,6 @@ function History ({ userDataReversed })  {
       .catch((err) => {
         console.log(err);
       })
-    // if (userDataReversed.length > 0) {
-    //   setAllMeasurements(userDataReversed.slice())
-    // }
-
     setLoading(false);
   }, [])
   const indexOfLastPost = currentPage * postsPerPage;

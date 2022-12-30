@@ -44,7 +44,6 @@ function App () {
     axios.get('/getAllMeasurementsChronological')
       .then((results) => {
         setUserDataChronological(results.data);
-        console.log(results.data, 'chronological app');
       })
       .catch((err) => {
         console.log(err)

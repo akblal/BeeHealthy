@@ -46,6 +46,18 @@ module.exports = {
           resolve(results.rows)
         })
       })
+    },
+    getLastXMeasurements(number) {
+      return new Promise ((resolve, reject) => {
+        queryStatement = `WITH t AS (SELECT * FROM healthData ORDER BY id DESC LIMIT ($1)) SELECT * FROM t ORDER BY id ASC;`
+        queryArgument = [number]
+        pool.query(queryStatement, queryArgument, (err, results) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(results.rows)
+        })
+      })
     }
   // getEmail (email) {
   //   return new Promise ((resolve, reject) => {

@@ -175,7 +175,6 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
                 </Button>
         })}
       </Stack>
-      {console.log(submit)}
       {!errDiastolic && !errSystolic && (systolic >= 130 || diastolic >= 80) && submit?
         <AlertHypertension /> : null}
       {!errDiastolic && !errSystolic && (systolic >= 120 && systolic < 130 && diastolic < 80) && submit?

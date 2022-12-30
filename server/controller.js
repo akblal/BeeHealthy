@@ -29,9 +29,21 @@ module.exports = {
     getAllMeasurementsChronological (req,res) {
       model.getAllMeasurementsChronological()
         .then((results) => {
-          console.log (results, 'results in controller')
           res.send(results);
           res.status(201);
+        })
+    },
+    getLastXMeasurements(req,res) {
+      let number = req.query.data;
+      console.log(number, 'number in controller')
+      model.getLastXMeasurements(number)
+        .then((results) => {
+          res.send(results);
+          res.status(201);
+        })
+        .catch((err) => {
+          console.log(err)
+          res.status(500)
         })
     }
 
