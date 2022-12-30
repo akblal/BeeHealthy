@@ -1,32 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import BloodPressureLine from './BloodPressureLine.jsx';
-import { UserData } from './UserData.js'
 
-function Trend ({ userData }) {
+function Trend ({ userDataChronological }) {
 
   const [bpData, setBPData] = useState();
   const [loaded, setLoaded] = useState(true);
+  let pointColor = [];
 
-  useEffect (() => {
-
-  }, [])
-
-  if (userData.length > 0 && loaded) {
+  if (userDataChronological.length > 0 && loaded) {
     setBPData ({
-      labels: userData.map((data) => data.created_at),
+      labels: userDataChronological.map((data) => data.created_at),
       datasets: [
         {
           label: 'Systolic BP',
-          data: userData.map((data) => data.systolic),
+          data: userDataChronological.map((data) => data.systolic),
+          borderColor: 'black',
+          borderWidth: 0.5,
+          pointBackgroundColor: function(context) {
+            var index = context.dataIndex;
+            var value = context.dataset.data[index];
+            return value > 130 ? 'red' :  // draw values over 120 in red
+                value > 120 ? 'orange' :
+                'black'    // else, draw values as black
+
+          },
         },
         {
           label: 'Diastolic BP',
-          data: userData.map((data) => data.diastolic),
+          data: userDataChronological.map((data) => data.diastolic),
+          borderColor: 'blue',
+          borderWidth: 0.5,
+          pointBackgroundColor: function(context) {
+            var index = context.dataIndex;
+            var value = context.dataset.data[index];
+            return value >80 ? 'red' :  // draw values over 80 in red
+                'blue'    // else, draw values as black
+
+          },
         }
       ]
     })
+
     setLoaded(false);
   }
+  // if (bpData) {
+  //   for (let i = 0; i < bpData.datasets[0].data.length; i++) {
+  //     if(bpData.datasets[0].data[i] > 100) {
+  //       pointColor.push('green')
+  //     } else {
+  //       pointColor.push('yellow')
+  //     }
+  //   }
+  // }
+  // if (bpData){
+  //   console.log (bpData.datasets[0].data, 'bpdata')
+  // }
+
 
 
 
@@ -34,8 +63,8 @@ function Trend ({ userData }) {
   return (
     <div>
       Trends...
-      {userData.length > 0 ? console.log(userData, 'trends'): console.log('nothing here')}
-      {userData.length > 0 ?
+      {userDataChronological.length > 0 ? console.log(userDataChronological, 'trends'): console.log('nothing here')}
+      {userDataChronological.length > 0 ?
         <BloodPressureLine chartData= {bpData} />
         : <h1>Please Input Data to be Grapahed</h1>}
 

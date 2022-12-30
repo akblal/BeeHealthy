@@ -22,19 +22,32 @@ const root = createRoot(container);
 
 function App () {
 
-  const [userData, setUserData] = useState([]);
+  const [userDataReversed, setUserDataReversed] = useState([]);
+  const [userDataChronological, setUserDataChronological] = useState([]);
 
   useEffect (() => {
-    getData();
+    getDataReversed();
+    getDataChronological();
   }, [])
 
-  const getData = () => {
-    axios.get('/getAllMeasurements')
+  const getDataReversed = () => {
+    axios.get('/getAllMeasurementsReversed')
       .then((results) => {
-        setUserData(results.data);
+        setUserDataReversed(results.data);
       })
       .catch((err) => {
         console.log(err);
+      })
+  }
+
+  const getDataChronological = () => {
+    axios.get('/getAllMeasurementsChronological')
+      .then((results) => {
+        setUserDataChronological(results.data);
+        console.log(results.data, 'chronological app');
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -54,10 +67,9 @@ function App () {
         <Route path='/' element= {<Home />} />
         <Route path='/bloodpressure' element= {<BloodPressure />} >
           <Route index element= {<AddMeasurement />} />
-          <Route path= 'addmeasurement' element= {<AddMeasurement getData= {getData}/>} />
-          <Route path= 'history' element= {<History />} />
-          {console.log(userData, 'userdata in app level ahhah')}
-          <Route path= 'trend' element= {<Trend userData= {userData}/>} />
+          <Route path= 'addmeasurement' element= {<AddMeasurement getDataReversed= {getDataReversed} getDataChronological= {getDataChronological}/>} />
+          <Route path= 'history' element= {<History userDataReversed= {userDataReversed}/>} />
+          <Route path= 'trend' element= {<Trend userDataChronological= {userDataChronological}/>} />
         </Route>
         <Route path='/contact' element= {<Contact />} />
         <Route path='*' element = {<ErrorPage />} />

@@ -53,3 +53,11 @@ nav a.active {
   border-width: 2px;
   border-style: solid;
 }
+
+.alert-blood-pressure {
+  position: absolute;
+  z-index: 999;
+  top: 20;
+  left: 20;
+  width: auto;
+}

@@ -15,8 +15,8 @@ module.exports = {
           res.sendStatus(500);
         })
     },
-    getAllMeasurements(req, res) {
-      model.getAllMeasurements()
+    getAllMeasurementsReversed(req, res) {
+      model.getAllMeasurementsReversed()
         .then((results) => {
           res.send(results);
           res.status(200);
@@ -24,6 +24,14 @@ module.exports = {
         .catch((err) => {
           console.log(err);
           res.sendStatus(500)
+        })
+    },
+    getAllMeasurementsChronological (req,res) {
+      model.getAllMeasurementsChronological()
+        .then((results) => {
+          console.log (results, 'results in controller')
+          res.send(results);
+          res.status(201);
         })
     }
 

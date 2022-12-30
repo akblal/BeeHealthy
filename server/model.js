@@ -25,15 +25,25 @@ module.exports = {
         })
       })
     },
-    getAllMeasurements() {
+    getAllMeasurementsReversed() {
       return new Promise ((resolve, reject) => {
         const queryStatement= 'SELECT * FROM healthData ORDER BY id DESC;';
-        console.log('in model')
         pool.query(queryStatement, (err, results) => {
           if (err) {
             return reject(err);
           }
           resolve(results.rows);
+        })
+      })
+    },
+    getAllMeasurementsChronological() {
+      return new Promise ((resolve, reject) => {
+        const queryStatement= 'SELECT * FROM healthData;';
+        pool.query(queryStatement, (err, results) => {
+          if (err) {
+            return reject(err);
+          }
+          resolve(results.rows)
         })
       })
     }

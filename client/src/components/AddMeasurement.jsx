@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import { TextField, Button, Stack, ButtonGroup } from '@mui/material';
 
 import { fullMedList } from './FullMedList.jsx'
+import AlertNormalBP from './AlertNormalBP.jsx'
+import AlertHypertension from './AlertHypertension.jsx'
+import AlertElevated from './AlertElevated.jsx'
 
 import axios from 'axios';
 
-function AddMeasurement ({ getData })  {
+function AddMeasurement ({ getDataReversed, getDataChronological })  {
 
   const [diastolic, setDiastolic] = useState();
   const [systolic, setSystolic] = useState();
@@ -21,11 +21,13 @@ function AddMeasurement ({ getData })  {
   const handleDiastolic = (e) => {
     let temp = e.target.value;
     setDiastolic(temp);
+    setSubmit(false);
   }
 
   const handleSystolic = (e) => {
     let temp = e.target.value;
     setSystolic(temp);
+    setSubmit(false);
   }
 
   const handleSubmit = (e) => {
@@ -62,15 +64,24 @@ function AddMeasurement ({ getData })  {
         medsTaken: tempTakenList
       })
       .then((results)=> {
-        getData();
+        getDataReversed();
+        getDataChronological();
+        setTakenMedList([].slice());
+        setRecMedList(fullMedList.slice());
+        setSubmit(true);
       })
       .catch ((err) => {
         console.log (err)
       })
+
+
+
     }
   }
 
   const addMed = (e) => {
+    setSubmit(false);
+
     let index = e.currentTarget.value;
 
     let temp = [...recMedList];
@@ -87,6 +98,8 @@ function AddMeasurement ({ getData })  {
   }
 
   const removeMed = (e) => {
+    setSubmit(false);
+
     let index = e.currentTarget.value;
 
     let temp = [...takenMedList];
@@ -103,7 +116,7 @@ function AddMeasurement ({ getData })  {
   }
 
   return (
-    <div>
+    <div className= 'container-add-measurement'>
       <Stack spacing= {5} direction= 'row'>
         <TextField
           required
@@ -124,11 +137,7 @@ function AddMeasurement ({ getData })  {
           onClick= {handleSubmit}
           >Submit
         </Button>
-
-        {errDiastolic ? <div>Error distolic</div> : <div>{diastolic}</div>}
-        {errSystolic ? <div>Error systolic</div> : <div>{systolic}</div>}
       </Stack>
-
 
       <div>Medications taken</div>
 
@@ -166,6 +175,15 @@ function AddMeasurement ({ getData })  {
                 </Button>
         })}
       </Stack>
+      {console.log(submit)}
+      {!errDiastolic && !errSystolic && (systolic >= 130 || diastolic >= 80) && submit?
+        <AlertHypertension /> : null}
+      {!errDiastolic && !errSystolic && (systolic >= 120 && systolic < 130 && diastolic < 80) && submit?
+        <AlertElevated /> : null}
+      {!errDiastolic && !errSystolic && (systolic < 120 && diastolic < 80) && submit?
+        <AlertNormalBP /> :
+        null
+      }
 
     </div>
   )
