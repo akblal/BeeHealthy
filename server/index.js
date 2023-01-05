@@ -3,7 +3,6 @@ const cors = require('cors');
 require('dotenv').config();
 const controller = require('./controller.js');
 
-
 const path = require("path");
 const app = express();
 
@@ -29,6 +28,7 @@ app.get('/*', function(req, res) {
 
 
 app.post ('/insertData', controller.insertData);
+app.post ('/alertDoctor', controller.alertDoctor)
 
 app.listen(Number(process.env.PORT),()=>{
   console.log('listening on port 3000');

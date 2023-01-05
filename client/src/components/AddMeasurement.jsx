@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Stack, ButtonGroup } from '@mui/material';
 
+import { patientInformation } from './PatientInformation.jsx'
 import { fullMedList } from './FullMedList.jsx'
 import AlertNormalBP from './AlertNormalBP.jsx'
 import AlertHypertension from './AlertHypertension.jsx'
@@ -74,9 +75,31 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
         console.log (err)
       })
 
+      if (systolic >= 130 || diastolic >= 80) {
+        alertDoctor(tempMedsList, tempTakenList);
+      }
 
 
     }
+  }
+
+  const alertDoctor = (tempMedsList, tempTakenList) => {
+    axios.post ('/alertDoctor', {
+      diastolic: diastolic,
+      systolic: systolic,
+      medsList: tempMedsList,
+      medsTaken: tempTakenList,
+      doctorName: patientInformation.doctorName,
+      patientName: patientInformation.name,
+    })
+    // .then((results) => {
+    //   console.log(results);
+    // })
+    .catch((err) => {
+      console.log(err);
+      console.log ('failed')
+    })
+    console.log('hello')
   }
 
   const addMed = (e) => {

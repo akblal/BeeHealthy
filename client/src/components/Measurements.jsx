@@ -9,15 +9,27 @@ function Measurements ({ currentPosts, loading }) {
     <div>
       {currentPosts.map((measurement, index) => {
         return (
-          <div key = {index}>
-            <span> {new Date (measurement.created_at).toLocaleString()} {measurement.systolic}/{measurement.diastolic} </span>
-            {measurement.meds_taken.map((taken, index) =>{
-              return (
-                <span style={{marginRight: 10}} key= {index}>{taken}</span>
-              )
-            })}
-            <div>---------------------------</div>
+          <div key = {index} className= 'history-measurement-card'>
+            <div className= 'date-time-container'>
+              {new Date (measurement.created_at).toLocaleString()}
+            </div>
+            <div className= 'blood-pressure-container'>
+              {measurement.systolic}/{measurement.diastolic}
+            </div>
+            {measurement.meds_taken.length ?
+              <div className= 'medication-container'>
+                {measurement.meds_taken.map((taken, index) =>{
+                  return (
+                    <div style={{marginRight: 10}} key= {index}>{taken}</div>
+                  )
+                })}
+              </div> :
+              <div className= 'medication-container'>
+                No Medications Taken
+              </div>
+            }
           </div>
+
         )
       })}
     </div>

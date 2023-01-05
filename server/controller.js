@@ -15,6 +15,21 @@ module.exports = {
           res.sendStatus(500);
         })
     },
+    alertDoctor (req,res) {
+      const diastolic = req.body.diastolic;
+      const systolic = req.body.systolic;
+      const medsList = req.body.medsList;
+      const medsTaken = req.body.medsTaken;
+      const doctorName = req.body.doctorName;
+      const patientName = req.body.patientName;
+      model.alertDoctor(diastolic, systolic, medsList, medsTaken, doctorName, patientName)
+        .then((results) => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          res.sendStatus(500);
+        })
+    },
     getAllMeasurementsReversed(req, res) {
       model.getAllMeasurementsReversed()
         .then((results) => {

@@ -1,18 +1,7 @@
 const pool = require ('./pool.js');
 
 module.exports = {
-  // insertEmail (email, firstName, lastName) {
-  //   return new Promise ((resolve, reject) => {
-  //     const queryStatement = 'INSERT INTO emailAddress (email, firstname, lastname) VALUES ($1, $2, $3);';
-  //     const queryArgument = [email, firstName, lastName];
-  //     pool.query(queryStatement, queryArgument, (err, results) => {
-  //       if (err) {
-  //         return reject(err);
-  //       }
-  //       resolve(results);
-  //     })
-  //   })
-  // },
+
     insertData (diastolic, systolic, medsList, medsTaken) {
       return new Promise ((resolve, reject) => {
         const queryStatement = 'INSERT INTO healthData (diastolic, systolic, meds_list, meds_taken) VALUES ($1, $2, $3, $4);';
@@ -25,6 +14,22 @@ module.exports = {
         })
       })
     },
+
+    alertDoctor(diastolic, systolic, medsList, medsTaken, doctorName, patientName) {
+      console.log(diastolic, systolic, medsList, medsTaken, doctorName, patientName)
+      return new Promise ((resolve, reject) => {
+        const queryStatement = 'INSERT INTO alert (patient_name, doctor_name, diastolic, systolic, meds_list, meds_taken) VALUES ($1, $2, $3, $4, $5, $6);';
+        const queryArgument = [patientName, doctorName ,diastolic, systolic, medsList, medsTaken]
+        pool.query(queryStatement, queryArgument, (err, results) => {
+          if (err) {
+            console.log(err)
+            return reject(err);
+          }
+          resolve(results);
+        })
+      })
+    },
+
     getAllMeasurementsReversed() {
       return new Promise ((resolve, reject) => {
         const queryStatement= 'SELECT * FROM healthData ORDER BY id DESC;';
@@ -36,6 +41,7 @@ module.exports = {
         })
       })
     },
+
     getAllMeasurementsChronological() {
       return new Promise ((resolve, reject) => {
         const queryStatement= 'SELECT * FROM healthData;';
@@ -47,6 +53,7 @@ module.exports = {
         })
       })
     },
+
     getLastXMeasurements(number) {
       return new Promise ((resolve, reject) => {
         queryStatement = `WITH t AS (SELECT * FROM healthData ORDER BY id DESC LIMIT ($1)) SELECT * FROM t ORDER BY id ASC;`
@@ -59,30 +66,4 @@ module.exports = {
         })
       })
     }
-  // getEmail (email) {
-  //   return new Promise ((resolve, reject) => {
-  //     console.log (email, 'model')
-  //     const queryStatement = 'SELECT * FROM emailAddress WHERE email = ($1);';
-  //     const queryArgument = [email];
-  //     pool.query(queryStatement, queryArgument, (err, results) => {
-  //       if (err) {
-  //         reject(err);
-  //       }
-  //       resolve(results);
-  //       })
-  //     })
-  //   },
-
-  // getUser (email) {
-  //   return new Promise ((resolve, reject) => {
-  //     const queryStatement = `SELECT firstname, lastname FROM emailAddress where email = ($1);`;
-  //     const queryArgument = [email];
-  //     pool.query (queryStatement, queryArgument, (err, results) => {
-  //       if (err) {
-  //         reject(err);
-  //       }
-  //       resolve (results.rows[0]);
-  //     })
-  //   })
-  // },
 }

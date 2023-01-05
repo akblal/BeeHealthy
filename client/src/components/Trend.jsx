@@ -33,15 +33,15 @@ function Trend () {
             pointBackgroundColor: function(context) {
               var index = context.dataIndex;
               var value = context.dataset.data[index];
-              return value > 130 ? 'red' :  // draw values over 120 in red
-                  value > 120 ? 'orange' :
+              return value >= 130 ? 'red' :  // draw values over 120 in red
+                  value >= 120 ? 'orange' :
                   'green'    // else, draw values as black
             },
             pointBorderColor:  function(context) {
               var index = context.dataIndex;
               var value = context.dataset.data[index];
               return value > 130 ? 'red' :  // draw values over 120 in red
-                  value > 120 ? 'orange' :
+                  value >= 120 ? 'orange' :
                   'green'    // else, draw values as black
             },
           },

@@ -31,7 +31,7 @@ function History ({ userDataReversed })  {
   return (
     <div>
       {userDataReversed.length > 0 ?
-        <div>
+        <div className= 'history-container'>
           <Measurements currentPosts= {currentPosts} loading= {loading}/>
           <Pagination postsPerPage= {postsPerPage} totalPosts= {allMeasurements.length} paginate= {paginate}/>
         </div>
