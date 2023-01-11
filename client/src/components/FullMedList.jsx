@@ -1,22 +1,22 @@
 export const fullMedList = [
   {
-    name: 'Motrin',
-    dosage: '5 mg',
+    name: 'Lisinopril',
+    dosage: '10 mg',
     id: 0,
   },
   {
-    name: 'Advil',
-    dosage: '10 mg',
+    name: 'Valsartin',
+    dosage: '40 mg',
     id: 1,
   },
   {
-    name: 'Tylenol',
-    dosage: '15 mg',
+    name: 'Trandolapril',
+    dosage: '2 mg',
     id: 2,
   },
   {
-    name: 'Caffeine',
-    dosage: '20 mg',
+    name: 'Atenolol',
+    dosage: '35 mg',
     id: 3,
   },
 ];

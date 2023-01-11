@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 
 
 function BloodPressure () {
 
   return (
     <div>
-      <nav>
-        <Link to= 'addmeasurement'>Add Measurement</Link>
-        <Link to= 'history'>History</Link>
-        <Link to= 'trend'>Trend</Link>
+      <nav className= 'navbar-bloodpressure'>
+        <NavLink className= 'bloodpressure-nav-link' to= 'addmeasurement'>Add Reading</NavLink>
+        <NavLink className= 'bloodpressure-nav-link' to= 'history'>History</NavLink>
+        <NavLink className= 'bloodpressure-nav-link' to= 'trend'>Trend</NavLink>
       </nav>
-      <Outlet />
+      <Outlet className= 'oulet-container'/>
     </div>
 
   )

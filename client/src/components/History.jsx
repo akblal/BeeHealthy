@@ -26,7 +26,7 @@ function History ({ userDataReversed })  {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   const currentPosts = allMeasurements
-    .slice(indexOfLastPost, indexOfLastPost + 10)
+    .slice(indexOfLastPost, indexOfLastPost + postsPerPage)
     .map((measurement, index) => {
       return (
         <div key = {index} className= 'history-measurement-card'>
@@ -59,25 +59,30 @@ function History ({ userDataReversed })  {
     setPageNumber(selected);
   }
   return (
-    <div>
+    <div className= 'center-body-container'>
+      <div className= 'body-container'>
+        {allMeasurements.length > 0 ?
+          <div className= 'history-container'>
+            {currentPosts}
+            <ReactPaginate
+              previousLabel ='<'
+              nextLabel= '>'
+              pageCount= {pageCount}
+              onPageChange= {changePage}
+              breakLabel="..."
+              containerClassName= {'paginationButtons'}
+              nextLinkClassName= {'nextButton'}
+              previousLinkClassName= {'previousButton'}
+              disabledClassName= {'disablePaginated'}
+              activeClassName= {'activePaginated'}
+              renderOnZeroPageCount={null}
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+            />
+      </div>
+      : <div> no data</div>}
 
-      {allMeasurements.length > 0 ?
-        <div className= 'history-container'>
-          {currentPosts}
-          <ReactPaginate
-            previousLabel ='<'
-            nextLabel= '>'
-            pageCount= {pageCount}
-            onPageChange= {changePage}
-            containerClassName= {'paginationButtons'}
-            nextLinkClassName= {'nextButton'}
-            previousLinkClassName= {'previousButton'}
-            disabledClassName= {'disablePaginated'}
-            activeClassName= {'activePaginated'}
-          />
-        </div>
-        : <div> no data</div>}
-
+      </div>
     </div>
 
   )

@@ -75,21 +75,51 @@ function Trend () {
   }
 
   return (
-    <div>
-      <FormControl >
-        <Select
-          default= {number}
-          value= {number}
-          onChange={handleNumber}
-        >
-        {numberMeasurements.map((data, index) => {
-          return <MenuItem key= {index} value= {data}>{data}</MenuItem>
-        })}
-        </Select>
-      </FormControl>
-      {bpData ?
-        <BloodPressureLine chartData= {bpData} />
-        : <h1>Please Input Data to be Graphed</h1>}
+    <div className= 'center-body-container'>
+      <div className= 'body-container'>
+        <FormControl >
+          <Select
+            default= {number}
+            value= {number}
+            onChange={handleNumber}
+          >
+          {numberMeasurements.map((data, index) => {
+            return <MenuItem key= {index} value= {data}>{data}</MenuItem>
+          })}
+          </Select>
+        </FormControl>
+        <div className= 'chart-legend'>
+          <div className= 'chart'>
+            {bpData ?
+              <BloodPressureLine chartData= {bpData} />
+              : <h1>Please Input Data to be Graphed</h1>}
+          </div>
+
+          <div className= 'legend'>
+              <div className= 'dots'>
+                <div className= 'red circle'>
+                </div>
+                <div className= 'legend-text'>
+                  Hypertensive
+                </div>
+              </div>
+              <div className= 'dots'>
+                <div className= 'orange circle'>
+                </div>
+                <div className= 'legend-text'>
+                  Elevated
+                </div>
+              </div>
+              <div className= 'dots'>
+                <div className= 'green circle'>
+                </div>
+                <div className= 'legend-text'>
+                  Normal
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

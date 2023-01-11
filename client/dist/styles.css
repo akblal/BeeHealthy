@@ -1,27 +1,38 @@
 #root {
-  margin: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .primary-nav {
   color: orange;
   display: flex;
   justify-content: space-between;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 45px;
 }
 
-.bee-logo {
-  font-size: 60px;
-}
-
-nav a {
+.primary-nav a {
   margin-right: 30px;
   color: rgb(184, 147, 36);
   text-decoration: none;
 }
 
-nav a.active {
+.primary-nav a.active{
   color: blue;
   font-weight: bold;
+  text-decoration: underline;
+}
+
+.active-link {
+  color: blue;
+  font-weight: bold;
+}
+
+.bee-logo {
+  font-size: 60px;
+  margin-left: 40px;
 }
 
 .bloodpressure-field {
@@ -65,7 +76,8 @@ nav a.active {
 .history-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  height: inherit;
 }
 
 .history-measurement-card {
@@ -73,10 +85,21 @@ nav a.active {
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 10px;
   width: 500px;
+  height: 80px;
   justify-items: center;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px98;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid gold;
+  padding: 10px;
+}
+
+.history-measurement-card:hover{
+  cursor: pointer;
+  border: 3px solid gold;
+  margin-bottom: 6px;
+
 }
 
 .blood-pressure-container{
@@ -110,4 +133,124 @@ nav a.active {
 .activePaginated a {
   color: white;
   background-color: blue;
+}
+
+.center-body-container {
+  display: flex;
+  justify-content: center;
+}
+
+.body-container {
+  width: 1122px;
+  height: 660px;
+  border: 3px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  text-align: center;
+}
+
+.outlet-container {
+  display: flex;
+  justify-content: center;
+}
+
+.measurement-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.measurement-meds-container
+.measurement-bp-container {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-bloodpressure {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  /* width: auto; */
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.navbar-bloodpressure a {
+  text-decoration: none;
+  color: rgb(184, 147, 36);
+  font-size: 25px;
+  width: fit-content;
+
+
+}
+
+.bloodpressure-nav-link {
+  border: 1px solid blue;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.bloodpressure-nav-link:hover{
+  transform: scale(105%);
+}
+
+.navbar-bloodpressure a:active{
+  transform: scale(0.99);
+
+}
+
+.navbar-bloodpressure a.active{
+  color: blue;
+  font-weight: bold;
+  /* text-decoration: underline; */
+
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  align-items: center;
+}
+
+.chart {
+  width: inherit;
+}
+
+.legend {
+  padding: 15px;
+
+}
+
+.dots {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 3px;
+
+}
+
+.red {
+  background-color: red;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: green;
+}
+
+.legend-text {
+  float: left;
 }

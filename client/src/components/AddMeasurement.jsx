@@ -17,7 +17,8 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
   const [errSystolic, setErrSystolic] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [takenMedList, setTakenMedList] = useState([]);
-  const [recMedList, setRecMedList] = useState (fullMedList);
+  const [recMedList, setRecMedList] = useState(fullMedList);
+  const [clicked, setClicked] = useState(false)
 
   const handleDiastolic = (e) => {
     let temp = e.target.value;
@@ -78,8 +79,6 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
       if (systolic >= 130 || diastolic >= 80) {
         alertDoctor(tempMedsList, tempTakenList);
       }
-
-
     }
   }
 
@@ -92,9 +91,6 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
       doctorName: patientInformation.doctorName,
       patientName: patientInformation.name,
     })
-    // .then((results) => {
-    //   console.log(results);
-    // })
     .catch((err) => {
       console.log(err);
       console.log ('failed')
@@ -102,113 +98,169 @@ function AddMeasurement ({ getDataReversed, getDataChronological })  {
     console.log('hello')
   }
 
-  const addMed = (e) => {
-    setSubmit(false);
+ const addMed = (e) => {
+  setSubmit(false);
 
-    let index = e.currentTarget.value;
+  let index = e.currentTarget.value;
 
-    let temp = [...recMedList];
-    temp.splice(index, 1);
-    setRecMedList(temp);
+  let temp = [...recMedList];
+  temp.splice(index, 1);
+  setRecMedList(temp);
 
-    let medicine = recMedList[index];
-    let newMedList = [...takenMedList];
-    newMedList.push(medicine);
-    newMedList.sort(function (a,b) {
-      return a.id - b.id;
-    });
-    setTakenMedList(newMedList);
-  }
+  let medicine = recMedList[index];
+  let newMedList = [...takenMedList];
+  newMedList.push(medicine);
+  newMedList.sort(function (a,b) {
+    return a.id - b.id;
+  });
+  setTakenMedList(newMedList);
+}
 
-  const removeMed = (e) => {
-    setSubmit(false);
+const removeMed = (e) => {
+  setSubmit(false);
 
-    let index = e.currentTarget.value;
+  let index = e.currentTarget.value;
 
-    let temp = [...takenMedList];
-    temp.splice(index, 1);
-    setTakenMedList(temp);
+  let temp = [...takenMedList];
+  temp.splice(index, 1);
+  setTakenMedList(temp);
 
-    let medicine = takenMedList[index];
-    let newMedList = [...recMedList];
-    newMedList.push(medicine);
-    newMedList.sort(function (a,b) {
-      return a.id - b.id;
-    });
-    setRecMedList(newMedList);
-  }
+  let medicine = takenMedList[index];
+  let newMedList = [...recMedList];
+  newMedList.push(medicine);
+  newMedList.sort(function (a,b) {
+    return a.id - b.id;
+  });
+  setRecMedList(newMedList);
+}
 
   return (
-    <div className= 'container-add-measurement'>
-      <Stack spacing= {5} direction= 'row'>
-        <TextField
-          required
-          id="outlined-basic"
-          label="Systolic"
-          onChange= {handleSystolic}
-          inputProps= {{maxLength:3,}}
-        />
-        <TextField
-          required
-          id="outlined-number"
-          label="Diastolic"
-          onChange= {handleDiastolic}
-          inputProps= {{maxLength:3,}}
-        />
-        <Button
-          variant="outlined"
-          onClick= {handleSubmit}
-          >Submit
-        </Button>
-      </Stack>
+    <div className= 'center-body-container'>
+      <div className= 'body-container'>
+        <div className= 'add-measurement-container'>
+          <div className= 'measurement-info-container'>
+            <div className= 'measurement-bp-container'>
+              <Stack spacing= {5} direction= 'row'>
+                <TextField
+                  required
+                  id="outlined-basic"
+                  label="Systolic"
+                  onChange= {handleSystolic}
+                  inputProps= {{maxLength:3,}}
+                />
+                <TextField
+                  required
+                  id="outlined-number"
+                  label="Diastolic"
+                  onChange= {handleDiastolic}
+                  inputProps= {{maxLength:3,}}
+                />
+              </Stack>
+            </div>
+            <div className= 'measurement-meds-container'>
+              <div>Medications taken</div>
 
-      <div>Medications taken</div>
+              <Stack direction= 'row' spacing= {2}>
+                {takenMedList.map((item, index) => {
+                  return <Button variant= 'outlined'
+                          orientation= 'vertical'
+                          size= 'small'
+                          aria-label= 'alignment-button-group'
+                          sx={{width:'auto', height:100, marginBottom:2}}
+                          space={2}
+                          key= {index}
+                          value= {index}
+                          color= 'success'
+                          onClick= {removeMed}>
+                          {item.name} {item.dosage}
+                        </Button>
+                })}
+              </Stack>
 
-      <Stack direction= 'row' spacing= {2}>
-        {takenMedList.map((item, index) => {
-          return <Button variant= 'outlined'
-                  orientation= 'vertical'
-                  size= 'small'
-                  aria-label= 'alignment-button-group'
-                  sx={{width:100, height:100, marginBottom:2}}
-                  space={2}
-                  key= {index}
-                  value= {index}
-                  onClick= {removeMed}>
-                  {item.name} {item.dosage}
-                </Button>
-        })}
-      </Stack>
+              <div>-------------------------------------</div>
+              <div>Medications Prescribed</div>
 
-      <div>-------------------------------------</div>
-      <div>Medications Prescribed</div>
+              <Stack direction= 'row' spacing= {2}>
+                {recMedList.map((item, index) => {
+                  return <Button variant= 'outlined'
+                          orientation= 'vertical'
+                          size= 'small'
+                          aria-label= 'alignment-button-group'
+                          sx={{width:'auto', height:100, marginBottom:2}}
+                          space={2}
+                          key= {index}
+                          value= {index}
+                          onClick= {addMed}>
+                          {item.name} {item.dosage}
+                        </Button>
+                })}
+              </Stack>
+            </div>
+            <Button
+              variant="outlined"
+              onClick= {handleSubmit}
+              >Submit
+            </Button>
+          </div>
 
-      <Stack direction= 'row' spacing= {2}>
-        {recMedList.map((item, index) => {
-          return <Button variant= 'outlined'
-                  orientation= 'vertical'
-                  size= 'small'
-                  aria-label= 'alignment-button-group'
-                  sx={{width:100, height:100, marginBottom:2}}
-                  space={2}
-                  key= {index}
-                  value= {index}
-                  onClick= {addMed}>
-                  {item.name} {item.dosage}
-                </Button>
-        })}
-      </Stack>
-      {!errDiastolic && !errSystolic && (systolic >= 130 || diastolic >= 80) && submit?
+        </div>
+        {!errDiastolic && !errSystolic && (systolic >= 130 || diastolic >= 80) && submit?
         <AlertHypertension /> : null}
-      {!errDiastolic && !errSystolic && (systolic >= 120 && systolic < 130 && diastolic < 80) && submit?
+        {!errDiastolic && !errSystolic && (systolic >= 120 && systolic < 130 && diastolic < 80) && submit?
         <AlertElevated /> : null}
-      {!errDiastolic && !errSystolic && (systolic < 120 && diastolic < 80) && submit?
+        {!errDiastolic && !errSystolic && (systolic < 120 && diastolic < 80) && submit?
         <AlertNormalBP /> :
         null
-      }
-
+        }
+      </div>
     </div>
   )
 }
 
 export default AddMeasurement
+
+// {!errDiastolic && !errSystolic && (systolic >= 130 || diastolic >= 80) && submit?
+//   <AlertHypertension /> : null}
+// {!errDiastolic && !errSystolic && (systolic >= 120 && systolic < 130 && diastolic < 80) && submit?
+//   <AlertElevated /> : null}
+// {!errDiastolic && !errSystolic && (systolic < 120 && diastolic < 80) && submit?
+//   <AlertNormalBP /> :
+//   null
+// }
+
+
+// const addMed = (e) => {
+//   setSubmit(false);
+
+//   let index = e.currentTarget.value;
+
+//   let temp = [...recMedList];
+//   temp.splice(index, 1);
+//   setRecMedList(temp);
+
+//   let medicine = recMedList[index];
+//   let newMedList = [...takenMedList];
+//   newMedList.push(medicine);
+//   newMedList.sort(function (a,b) {
+//     return a.id - b.id;
+//   });
+//   setTakenMedList(newMedList);
+// }
+
+// const removeMed = (e) => {
+//   setSubmit(false);
+
+//   let index = e.currentTarget.value;
+
+//   let temp = [...takenMedList];
+//   temp.splice(index, 1);
+//   setTakenMedList(temp);
+
+//   let medicine = takenMedList[index];
+//   let newMedList = [...recMedList];
+//   newMedList.push(medicine);
+//   newMedList.sort(function (a,b) {
+//     return a.id - b.id;
+//   });
+//   setRecMedList(newMedList);
+// }

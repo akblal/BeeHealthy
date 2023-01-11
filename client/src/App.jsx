@@ -65,7 +65,7 @@ function App () {
       <Routes>
         <Route path='/' element= {<Home />} />
         <Route path='/bloodpressure' element= {<BloodPressure />} >
-          <Route index element= {<AddMeasurement />} />
+
           <Route path= 'addmeasurement' element= {<AddMeasurement getDataReversed= {getDataReversed} getDataChronological= {getDataChronological}/>} />
           <Route path= 'history' element= {<History userDataReversed= {userDataReversed}/>} />
           <Route path= 'trend' element= {<Trend userDataChronological= {userDataChronological}/>} />
