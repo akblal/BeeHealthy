@@ -93,6 +93,8 @@
   border-radius: 10px;
   border: 1px solid gold;
   padding: 10px;
+  padding-bottom: 15px;
+  font-size: 20px;
 }
 
 .history-measurement-card:hover{
@@ -142,7 +144,7 @@
 
 .body-container {
   width: 1122px;
-  height: 660px;
+  height: 680px;
   border: 3px solid black;
   border-radius: 25px;
   padding: 20px;
@@ -253,4 +255,52 @@
 
 .legend-text {
   float: left;
+}
+
+.date-time-container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.date-container {
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.more-medication {
+  text-decoration: underline;
+  color: blue;
+}
+
+.more-medication:hover {
+  color:purple;
+}
+
+.more-medication:active {
+  transform: scale(0.97);
+}
+
+.dialog-box {
+  border-radius: 50%;
+  width: 100%;
+  color: yellow;
+}
+
+.dialog-bp {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.dialog-time {
+  display: flex;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.dialog-medication-container {
+  font-family: 'Nunito Sans', sans-serif;
 }
